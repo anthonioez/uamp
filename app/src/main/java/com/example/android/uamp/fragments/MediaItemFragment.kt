@@ -79,15 +79,14 @@ class MediaItemFragment : Fragment() {
                     if (list?.isNotEmpty() == true) View.GONE else View.VISIBLE
                 listAdapter.submitList(list)
             })
-        mediaItemFragmentViewModel.networkError.observe(viewLifecycleOwner,
-            Observer { error ->
-                if (error) {
-                    binding.loadingSpinner.visibility = View.GONE
-                    binding.networkError.visibility = View.VISIBLE
-                } else {
-                    binding.networkError.visibility = View.GONE
-                }
-            })
+        mediaItemFragmentViewModel.networkError.observe(viewLifecycleOwner) { error ->
+            if (error) {
+                binding.loadingSpinner.visibility = View.GONE
+                binding.networkError.visibility = View.VISIBLE
+            } else {
+                binding.networkError.visibility = View.GONE
+            }
+        }
 
         // Set the adapter
         binding.list.adapter = listAdapter

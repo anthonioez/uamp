@@ -38,6 +38,7 @@ import androidx.media.MediaBrowserServiceCompat.BrowserRoot.EXTRA_RECENT
 import com.example.android.uamp.media.extensions.album
 import com.example.android.uamp.media.extensions.flag
 import com.example.android.uamp.media.extensions.id
+import com.example.android.uamp.media.extensions.immutableFlag
 import com.example.android.uamp.media.extensions.toMediaItem
 import com.example.android.uamp.media.extensions.trackNumber
 import com.example.android.uamp.media.library.AbstractMusicSource
@@ -171,7 +172,7 @@ open class MusicService : MediaBrowserServiceCompat() {
         // Build a PendingIntent that can be used to launch the UI.
         val sessionActivityPendingIntent =
             packageManager?.getLaunchIntentForPackage(packageName)?.let { sessionIntent ->
-                PendingIntent.getActivity(this, 0, sessionIntent, 0)
+                PendingIntent.getActivity(this, 0, sessionIntent, PendingIntent.FLAG_UPDATE_CURRENT.immutableFlag())
             }
 
         // Create a new MediaSession.
